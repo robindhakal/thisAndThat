@@ -13,9 +13,24 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { Camera } from '@ionic-native/camera';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 Pro.init('32B05477', {
   appVersion: '0.0.1'
 })
+
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyCq9BS1vC6T73dlc6EFvR5IBb5DLPGGrPE",
+  authDomain: "thisandthat-myapp.firebaseapp.com",
+  databaseURL: "https://thisandthat-myapp.firebaseio.com",
+  projectId: "thisandthat-myapp",
+  storageBucket: "thisandthat-myapp.appspot.com",
+  messagingSenderId: "233598061413"
+};
 
 @Injectable()
 export class MyErrorHandler implements ErrorHandler {
@@ -49,7 +64,9 @@ export class MyErrorHandler implements ErrorHandler {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,6 +80,7 @@ export class MyErrorHandler implements ErrorHandler {
     StatusBar,
     SplashScreen,
     IonicErrorHandler,
+    Camera,
     [{provide: ErrorHandler, useClass: IonicErrorHandler}]
   ]
 })
